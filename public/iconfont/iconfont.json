@@ -1,0 +1,86 @@
+{
+  "id": "3672437",
+  "name": "todo",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "12868744",
+      "name": "close",
+      "font_class": "close",
+      "unicode": "e61d",
+      "unicode_decimal": 58909
+    },
+    {
+      "icon_id": "29273663",
+      "name": "叉号",
+      "font_class": "chahao",
+      "unicode": "e603",
+      "unicode_decimal": 58883
+    },
+    {
+      "icon_id": "4294025",
+      "name": "记事本",
+      "font_class": "jishiben",
+      "unicode": "e772",
+      "unicode_decimal": 59250
+    },
+    {
+      "icon_id": "31919194",
+      "name": "右侧",
+      "font_class": "youce",
+      "unicode": "e650",
+      "unicode_decimal": 58960
+    },
+    {
+      "icon_id": "31919195",
+      "name": "左侧",
+      "font_class": "zuoce",
+      "unicode": "e651",
+      "unicode_decimal": 58961
+    },
+    {
+      "icon_id": "31919198",
+      "name": "左",
+      "font_class": "zuo",
+      "unicode": "e64e",
+      "unicode_decimal": 58958
+    },
+    {
+      "icon_id": "31919199",
+      "name": "右",
+      "font_class": "you",
+      "unicode": "e64f",
+      "unicode_decimal": 58959
+    },
+    {
+      "icon_id": "15838441",
+      "name": "chart-bar",
+      "font_class": "chart-bar",
+      "unicode": "e667",
+      "unicode_decimal": 58983
+    },
+    {
+      "icon_id": "15838445",
+      "name": "check-item",
+      "font_class": "check-item",
+      "unicode": "e668",
+      "unicode_decimal": 58984
+    },
+    {
+      "icon_id": "15838517",
+      "name": "prompt",
+      "font_class": "prompt",
+      "unicode": "e67b",
+      "unicode_decimal": 59003
+    },
+    {
+      "icon_id": "15838535",
+      "name": "setting",
+      "font_class": "setting",
+      "unicode": "e67d",
+      "unicode_decimal": 59005
+    }
+  ]
+}
