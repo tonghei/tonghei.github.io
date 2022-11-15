@@ -17,7 +17,7 @@
         <em class="iconfont icon-close"></em>
       </li>
       <div class="box" v-show="true">
-        <img src="/images/list0.png" alt="" />
+        <img :src="`/images/list${random}.png`" alt="" />
         <div class="text">
           <h1>快创建今天的待办吧~~</h1>
           <p class="oneSentence">1</p>
@@ -28,72 +28,15 @@
 </template>
 
 <script setup lang="ts">
+import { ref,onMounted } from 'vue';
 
-// import { mapState } from "vuex";
-// import { reqOneSentence} from "../api/index.js";
-
-// export default {
-//   name: "TodolistOrderList",
-
-//   data() {
-//     return {
-//       nowdater: undefined,
-//       oneSentence: "",
-//     };
-//   },
-//   computed: {
-//     ...mapState(["todolist"]),
-//     nowList() {
-//       // 筛选当天数组
-//       let list = this.todolist.filter((item) => {
-//         return item.dater == this.nowdater;
-//       });
-//       let complete = list.filter((item) => {
-//         return item.isChecked;
-//       });
-//       let type = list.filter((item) => {
-//         return !item.isChecked;
-//       });
-
-//       type.sort((a, b) => {
-//         return a.priority - b.priority;
-//       });
-//       list = type.concat(complete);
-//       return list;
-//     },
-//     // 随机数
-//   },
-//   methods: {
-//     changeChecked(id) {
-//       this.$store.dispatch("changeChecked", id);
-//     },
-//     removeList(id) {
-//       this.$store.dispatch("removeList", id);
-//     },
-//     getorderDater(dater) {
-//       this.nowdater = dater;
-//     },
-//     // 计算一个随机数返回 生成随机图
-//     getRandom() {
-//       return Math.floor(Math.random() * 9) + "";
-//     },
-//   },
-//   mounted() {
-//     // 全局时间总线接收参数
-//     this.$bus.$on("getorderDater", this.getorderDater);
+let random = ref(`${Math.floor(Math.random()*9)}`)
+console.log(random.value);
 
 
-//     //  天气api
-//     reqOneSentence().then(
-//       (res) => {
-//         this.oneSentence = res.data.split('"')[1];
-//       },
-//       (rej) => {
-//         console.log(rej.message);
-//       }
-//     );
-//   },
-// };
+onMounted(()=>{
+  Math.random
+})
 </script>
 
 <style lang="less" scoped>

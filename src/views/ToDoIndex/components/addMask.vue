@@ -4,8 +4,8 @@
         <div class="mask_box">
             <div class="title">
                 <h1>新建待办</h1>
-                <span @click="updateMessage(1)">确定</span>
-                <span @click="updateMessage(0)">取消</span>
+                <span @click="addMessage(true)">确定</span>
+                <span @click="addMessage(false)">取消</span>
             </div>
             <textarea placeholder="想做点什么?" v-model="msg"></textarea>
             <div class="mask_bottom">
@@ -39,15 +39,59 @@
 </template>
 <script setup lang="ts">
 import { ref } from 'vue'
+import { createLi } from "@/hooks/useAlertMsg";
+import { useCalendarStore } from "@/stores/calendar";
+import { useTodoListStores } from "@/stores/todolist";
+import { nanoid } from "nanoid";
 
-const prop = defineProps(['maskIsShow'])
-let msg = ref('')
-let priority = ref(0)
-
-function updateMessage(type: number) {
-    
+// 添加待办事项对象
+interface todo {
+    id: string
+    msg: string
+    date: string
+    priority: number
+    isChecked: boolean
 }
 
+const useDate = useCalendarStore()
+const useToDoList = useTodoListStores()
+const emit = defineEmits(['changemaskIsShow'])
+const prop = defineProps(['maskIsShow'])
+let msg = ref('')
+
+// 添加信息
+function addMessage(type: boolean) {
+    if (type) {
+        // 确定触发事件
+        if (!msg.value) {
+            createLi("未填写内容哦", 0)
+            return
+        } else {
+            let obj: todo = {
+                id: nanoid(),
+                msg: msg.value,
+                date: useDate.nowDay as string,
+                priority: priority.value,
+                isChecked: false
+            }
+            //store 存储
+            useToDoList.addListContext(obj)
+            //格式化  并关闭
+            msg.value = ''
+            priority.value = 0
+            emit('changemaskIsShow')
+            createLi("填写成功,记得完成事件哦")
+        }
+    } else {
+        msg.value = ''
+        priority.value = 0
+        emit('changemaskIsShow')
+        createLi("取消填写内容哦", 0)
+    }
+}
+
+// 改变 priority颜色
+let priority = ref(0)
 function changeColor(type: number) {
     priority.value = type
 }

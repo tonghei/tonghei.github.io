@@ -22,7 +22,7 @@
       <DailyWeather />
     </div>
     <Teleport to="#mask">
-    <addMask :maskIsShow="maskIsShow" />
+      <addMask :maskIsShow="maskIsShow" @changemaskIsShow="changemaskIsShow" />
     </Teleport>
   </div>
 </template>
@@ -34,8 +34,12 @@ import OrderList from "@/views/ToDoIndex/components/OrderList.vue";
 import MyCalendar from "@/views/ToDoIndex/components/MyCalendar.vue";
 import addMask from "@/views/ToDoIndex/components/addMask.vue";
 
-
+//#region  遮罩层
 let maskIsShow = ref(false)
+function changemaskIsShow(type:boolean = false) {
+  maskIsShow.value = type
+}
+//#endregion
 </script>
 <style lang="less">
 #main {

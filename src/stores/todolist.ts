@@ -3,7 +3,7 @@ import { ref } from "vue";
 
 export const useTodoListStores = defineStore('todoList',()=>{
     interface todo{
-        id:number
+        id:string
         msg:string
         date:string
         priority:number
@@ -20,9 +20,8 @@ export const useTodoListStores = defineStore('todoList',()=>{
         getListContext()
     }
     //删
-    function removeListContext(id:number){
+    function removeListContext(id:string){
         localStorage.setItem('todoList',JSON.stringify(list.value.filter(item=>item.id !== id)))
-
     }
     //初始化及刷新
     function getListContext(){

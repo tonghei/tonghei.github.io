@@ -4,11 +4,12 @@
     <NavBarRight />
   </div>
   <div id="mask"></div>
+  <AlertMsg />
 </template>
 <script setup lang="ts">
+import AlertMsg from "@/components/AlertMsg.vue";
 import NavBarLeft from "@/components/NavBarLeft/index.vue";
 import NavBarRight from "@/components/NavBarRight/index.vue";
-
 </script>
 
 <style lang="less">
@@ -20,6 +21,7 @@ import NavBarRight from "@/components/NavBarRight/index.vue";
   }
 }
 
+//#region
 html,
 body,
 div,
@@ -185,4 +187,5 @@ html {
   display: flex;
   height: 100%;
 }
+//#endregion
 </style>
