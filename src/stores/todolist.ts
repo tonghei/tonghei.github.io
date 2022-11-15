@@ -22,6 +22,7 @@ export const useTodoListStores = defineStore('todoList',()=>{
     //删
     function removeListContext(id:string){
         localStorage.setItem('todoList',JSON.stringify(list.value.filter(item=>item.id !== id)))
+        getListContext()
     }
     //初始化及刷新
     function getListContext(){
@@ -31,6 +32,6 @@ export const useTodoListStores = defineStore('todoList',()=>{
 
 
 
-    return {list,addListContext,removeListContext}
+    return {list,addListContext,getListContext,removeListContext}
 
 })

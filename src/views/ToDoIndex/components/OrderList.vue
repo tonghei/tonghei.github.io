@@ -1,26 +1,24 @@
 <template>
   <div class="things clearfix">
     <ul>
-      <li
-        :class="{ isachieve: true }"
-      >
-        <span
-          :class="{
-            emergency: true
-          }"
-        ></span>
-        <input
-          type="checkbox"
-          :checked="true"
-        />
-        <p>1</p>
-        <em class="iconfont icon-close"></em>
+      <li :class="{ isachieve: item.isChecked }" v-for="item in list">
+        <span :class="{
+          emergency: 0 == item.priority,
+          important: 1 == item.priority,
+          priority: 2 == item.priority,
+          common: 3 == item.priority,
+        }" v-if="!item.isChecked"></span>
+        <span :class="{ achieve: item.isChecked }" v-else>
+        </span>
+        <input type="checkbox" v-model="item.isChecked" @click="changeCheck(item.id)" />
+        <p>{{item.msg}}</p>
+        <em class="iconfont icon-close" @click="remove(item.id)"></em>
       </li>
-      <div class="box" v-show="true">
-        <img :src="`/images/list${random}.png`" alt="" />
+      <div class="box" v-show="!list.length">
+        <img :src="`/images/list${random}.png`" alt="努力变得优秀哦" />
         <div class="text">
           <h1>快创建今天的待办吧~~</h1>
-          <p class="oneSentence">1</p>
+          <p class="oneSentence">{{ onesentence }}</p>
         </div>
       </div>
     </ul>
@@ -28,15 +26,67 @@
 </template>
 
 <script setup lang="ts">
-import { ref,onMounted } from 'vue';
+import { ref, onMounted } from 'vue';
+import { useTodoListStores } from "@/stores/todolist";
+import { useCalendarStore } from "@/stores/calendar";
 
-let random = ref(`${Math.floor(Math.random()*9)}`)
-console.log(random.value);
+import { createLi } from "@/hooks/useAlertMsg";
 
+import { reqOneSentence } from "@/api/idnex";
+import { computed } from '@vue/reactivity';
 
-onMounted(()=>{
-  Math.random
+// store
+const useTodoList = useTodoListStores()
+const useDate = useCalendarStore()
+
+useTodoList.getListContext()
+
+// 数组排序
+let list = computed(() => {
+  let arr = null
+  arr = useTodoList.list.filter(item=>item.date === useDate.nowDay)
+  
+  return  arr.sort((a, b) => a.priority - b.priority)
 })
+
+
+// 随机图片
+let random = ref(`${Math.floor(Math.random() * 9)}`)
+
+// 一言请求
+let onesentence = ref<string | undefined>(undefined)
+
+async function oneSentence() {
+  const req = await reqOneSentence()
+  if (req.status === 200) {
+    onesentence.value = (req.data as string).split('"')[1]
+  }
+}
+
+onMounted(() => {
+  try {
+    oneSentence()
+  } catch (error) {
+    createLi("请求超时啦,请稍后再试哦", 0)
+  }
+
+})
+
+// 改变状态
+function changeCheck(id: string) {
+  useTodoList.list.forEach(item => {
+    if (item.id === id) {
+      item.isChecked = !item.isChecked
+    }
+  })
+}
+
+//移除对应item
+function remove(id:string){
+  console.log(1);
+  
+  useTodoList.removeListContext(id)
+}
 </script>
 
 <style lang="less" scoped>
@@ -56,6 +106,7 @@ onMounted(()=>{
       width: 400px;
       line-height: 2em;
       float: left;
+
       h1 {
         color: rgb(23, 50, 111);
         font-size: 20px;
