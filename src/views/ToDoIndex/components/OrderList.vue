@@ -10,7 +10,7 @@
         }" v-if="!item.isChecked"></span>
         <span :class="{ achieve: item.isChecked }" v-else>
         </span>
-        <input type="checkbox" v-model="item.isChecked" @click="changeCheck(item.id)" />
+        <input type="checkbox" v-model="item.isChecked" @click="useTodoList.changeListChecked(item.id)" />
         <p>{{item.msg}}</p>
         <em class="iconfont icon-close" @click="remove(item.id)"></em>
       </li>
@@ -71,15 +71,6 @@ onMounted(() => {
   }
 
 })
-
-// 改变状态
-function changeCheck(id: string) {
-  useTodoList.list.forEach(item => {
-    if (item.id === id) {
-      item.isChecked = !item.isChecked
-    }
-  })
-}
 
 //移除对应item
 function remove(id:string){

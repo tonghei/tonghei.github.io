@@ -1,37 +1,49 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
 
-export const useTodoListStores = defineStore('todoList',()=>{
-    interface todo{
-        id:string
-        msg:string
-        date:string
-        priority:number
-        isChecked:boolean
+export const useTodoListStores = defineStore('todoList', () => {
+    interface todo {
+        id: string
+        msg: string
+        date: string
+        priority: number
+        isChecked: boolean
     }
 
     let list = ref<todo[]>(JSON.parse(localStorage.getItem('todoList') as string)) || ref([])
-    
+
     //增
-    function addListContext(obj:todo){
+    function addListContext(obj: todo) {
         let arr = JSON.parse(localStorage.getItem('todoList') as string) || []
         arr.push(obj)
         localStorage.setItem('todoList', JSON.stringify(arr))
         getListContext()
     }
     //删
-    function removeListContext(id:string){
-        localStorage.setItem('todoList',JSON.stringify(list.value.filter(item=>item.id !== id)))
+    function removeListContext(id: string) {
+        localStorage.setItem('todoList', JSON.stringify(list.value.filter(item => item.id !== id)))
         getListContext()
     }
     //初始化及刷新
-    function getListContext(){
+    function getListContext() {
         list.value = JSON.parse(localStorage.getItem('todoList') as string) || []
+    }
+    // 更改选中状态
+    function changeListChecked(id: string) {
+        let arr =  list.value
+        arr.forEach(item=>{
+            if(item.id === id){
+                item.isChecked = !item.isChecked
+            }
+        })
+        
+        localStorage.setItem('todoList', JSON.stringify(arr))
+
     }
 
 
 
 
-    return {list,addListContext,getListContext,removeListContext}
+    return { list, addListContext, getListContext, removeListContext, changeListChecked }
 
 })

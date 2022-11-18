@@ -4,51 +4,25 @@
       <i :class="'qi-514'" id="icon"></i>
       <ul>
         <li>
-          当前城市:<span>郑州{{ weatherMsg.text }}</span>
+          当前城市:<span>郑州</span>
         </li>
         <li>
-          当前温度:<span>12{{ weatherMsg.temp }}℃</span>
+          当前温度:<span>12℃</span>
         </li>
         <li>
-          体感温度:<span>14{{ weatherMsg.feelsLike }}℃</span>
+          体感温度:<span>14℃</span>
         </li>
         <li>
-          当前风向:<span>北风{{ weatherMsg.windDir }}</span>
+          当前风向:<span>北风</span>
         </li>
         <li>
-          当前风速:<span>3{{ weatherMsg.windScale }}级</span>
+          当前风速:<span>3级</span>
         </li>
       </ul>
     </div>
   </template>
   
-  <script>
-  // import { reqWeatherMessage } from "../api/index";
-  
-  export default {
-    name: "DailyWeather",
-  
-    data() {
-      return {
-        weatherMsg: {},
-      };
-    },
-  
-    mounted() {
-      // reqWeatherMessage().then(
-      //   (res) => {
-      //     if (res.data.code == 200) {
-      //       this.weatherMsg = res.data.now;
-      //     }
-      //   },
-      //   (rej) => {
-      //     console.log(rej);
-      //   }
-      // );
-    },
-  
-    methods: {},
-  };
+  <script setup lang="ts">
   </script>
   
   <style lang="less" scoped>

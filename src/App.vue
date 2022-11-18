@@ -7,16 +7,31 @@
   <AlertMsg />
 </template>
 <script setup lang="ts">
+import { onMounted, provide } from "vue";
+
 import AlertMsg from "@/components/AlertMsg.vue";
 import NavBarLeft from "@/components/NavBarLeft/index.vue";
 import NavBarRight from "@/components/NavBarRight/index.vue";
+
+import * as echarts from "echarts";
+//依赖
+provide('ec', echarts)
+
+//禁止选中
+onMounted(() => {
+  document.onselectstart = function () {
+    return false;
+  };
+})
+
 </script>
 
 <style lang="less">
-#app{
+#app {
   display: flex;
   width: 100%;
-  .navbar-right{
+
+  .navbar-right {
     flex: 1;
   }
 }
@@ -187,5 +202,6 @@ html {
   display: flex;
   height: 100%;
 }
+
 //#endregion
 </style>
