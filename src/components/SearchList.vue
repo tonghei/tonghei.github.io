@@ -1,10 +1,11 @@
 <template>
   <div class="search">
+    <h1>{{searchList.length}}</h1>
     <div class="search-box">
       <input type="text" placeholder="搜索待办" v-model="searchText" />
-      <ul v-if="serchList.length">
-        <li v-if="!serchList.length"><span style="color:red">当前检索下无内容哦~</span></li>
-        <li v-for="item in serchList" :key="item.id" @click="changeNowDay(item.date)"><span>{{ item.msg }}</span> <em>日期
+      <ul v-if="searchText">
+        <li v-if="searchList.length === 0"><span style="color:red">当前检索下无内容哦~</span></li>
+        <li v-for="item in searchList" :key="item.id" @click="changeNowDay(item.date)"><span>{{ item.msg }}</span> <em>日期
             :{{ item.date.split(',')[0] }}年{{ item.date.split(',')[1] }}月{{ item.date.split(',')[2] }}日</em></li>
       </ul>
     </div>
@@ -22,7 +23,7 @@ const todo = useTodoListStores()
 const nowDate = useCalendarStore()
 let searchText = ref('')
 
-let serchList = computed(() => {
+let searchList = computed(() => {
   if (searchText.value) {
     let arr = todo.list
     arr = arr.filter(item => {

@@ -16,12 +16,8 @@ const router = createRouter({
             component:()=>import('@/views/MySetting.vue')
         },
         {
-            path:'/OrderList',
-            component:()=>import('@/views/OrderList.vue')
-        },
-        {
-            path:'/ToDoIndex',
-            component:()=>import('@/views/ToDoIndex/ToDoIndex.vue')
+            path:'/AboutMe',
+            component:()=>import('@/views/AboutMe.vue')
         },
         {
             path:'/',

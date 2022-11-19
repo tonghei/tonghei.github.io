@@ -27,7 +27,7 @@
           </router-link>
         </li>
         <li>
-          <router-link to="/OrderList">
+          <router-link to="/AboutMe">
             <span class="iconfont icon-prompt"></span>
             关于
           </router-link>
